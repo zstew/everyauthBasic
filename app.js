@@ -14,7 +14,7 @@ everyauth.facebook.appId('290649004282465')
     // This configurable route handler defines how you want to respond to
     // that.
     // If you do not configure this, everyauth renders a default fallback
-    // view notifying the user that their authentication failed and why.
+    // view notifying the user that their authentication failed and why. 
   })
   .findOrCreateUser( function (session, accessToken, accessTokExtra, fbUserMetadata) {
       console.log("find or create user running");
