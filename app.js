@@ -4,8 +4,8 @@ everyauth.everymodule.findUserById( function (req,userId, foundUser_cb) {
 //  User.findById(userId, callback);
   // callback has the signature, function (err, user) {...}
 });
-everyauth.facebook.appId('290649004282465')
-    .appSecret('218bee2c627c2ee47f833b04d8452e6f')
+everyauth.facebook.appId('188669381307230')
+    .appSecret('a5ffd5750958c1e648265315ecf305f0')
     .handleAuthCallbackError( function (req, res) {
         req.data.warning("fb callback error");
         console.log("failed callback to facebook");
