@@ -8,16 +8,16 @@
     </head>
     <body>
         <div>Hello World</div>
-        
+        <p>What am I doing wrong?  Nothing comes back from this AJAX request. Works if you visit with browser though.</p>
         <br>
         <br>
         <br>
 
-        $.ajax({
+$.ajax({
   type: "GET",
-  url:"/api/facebook/callback",
+  url:"/facebook",
   data:{},
-  success: function(cat){console.log(cat)},
+  success: function(res){console.log(res)},
   dataType: 'JSON'
 });
     </body>
