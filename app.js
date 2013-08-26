@@ -2,9 +2,10 @@ var application_root = __dirname,
     express = require("express"),
     path = require("path")
 var url = require('url'), path = require('path');
-var app = express();var everyauth = require('everyauth');
+var app = express();
+var everyauth = require('everyauth');
 var passport = require("passport")
-
+var fs = require("fs")
 // everyauth.everymodule.findUserById( function (req,userId, foundUser_cb) {
 //     console.log("found user");
 // //  User.findById(userId, callback);
@@ -66,11 +67,20 @@ app.configure(function (){
   // app.use(passport.session())
   // app.use(everyauth.middleware());//put this here b/c in everyauth example, removed the 'app' from the params and it works, fails to load any resources othewise
 });
+
 // app.get('/facebook', { scope: ['read_stream', 'publish_actions'] }, function (req,res) {
 //   passport.authenticate("facebook", {failureRedirect: '/'})(req, res);
 // })
-app.get('/facebook', 
-  passport.authenticate('facebook', { scope: ['email', 'user_status', "user_friends"] })
+
+var port = 3000;
+app.listen(port, 'localhost');
+console.log("listening on port " + port); 
+
+app.get('/facebook', function (req,res ) {
+  passport.authenticate('facebook', { scope: ['email', 'user_status', "user_friends"] })(req,res)
+}
+  
+  
 );
 app.get('/facebook/callback', function(req,res) {
   passport.authenticate("facebook", function(err, user, info) {
@@ -88,8 +98,16 @@ app.get('/facebook/callback', function(req,res) {
 })
 
 app.get('/', function(req,res) {
-  res.send("<h3>Hello</h3>")
+  console.log("call index");
+  fs.readFile("/www/index.html", function(err,data) {
+    index = data
+    res.end(index)
+  })
+  
 })
+// app.all('*', function(req,res) {
+//   console.log("requested for", req.path);
+// })
 // app.post('/api/verifyFBConnection', function(req, res){
 //     var fbTools = require('./src/fbTools');   
 //     fbTools.verifyConnection(req, function(err, fbResponse){
@@ -106,7 +124,3 @@ app.get('*', function(req, res){
   res.send({error:"404, how's your day going?"}, 404);
 });
 
-
-var port = 3000;
-app.listen(port, 'localhost');
-console.log("listening on port " + port); 

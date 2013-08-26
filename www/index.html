@@ -12,13 +12,24 @@
         <br>
         <br>
         <br>
-
-$.ajax({
-  type: "GET",
-  url:"/facebook",
-  data:{},
-  success: function(res){console.log(res)},
-  dataType: 'JSON'
-});
+      <button id="btn">BUTTON</button>
+      
+      <script>
+      $("#btn").click(function() {
+        console.log("button pressed");
+        $.ajax({
+          type: "GET",
+          url:"/facebook",
+          dataType: "json",
+          success: function(res){
+            console.log(res)},
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus)
+            console.log(errorThrown);
+          }
+        });
+      })
+     
+      </script>
     </body>
 </html>
