@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    </head>
+    <body>
+        <div>Hello World</div>
+        <p>What am I doing wrong?  Nothing comes back from this AJAX request. Works if you visit with browser though.</p>
+        <br>
+        <br>
+        <br>
+      <button id="fb">BUTTON</button>
+      
+      <script>
+      $("#btn").click(function() {
+        console.log("button pressed");
+        $.ajax({
+          type: "GET",
+          url:"/facebook",
+          success: function(res){
+            console.log(res)
+            console.log(arguments);
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.log("ERROR:",textStatus)
+            console.log(errorThrown);
+          }
+        });
+      })
+      $('#fb').click(function(){
+        console.log("submit form");
+        // event.preventDefault();
+        $.ajax({
+            type: 'GET',
+            url: '/facebook',
+            crossDomain: true,
+            success: function(data, status) {
+              console.log("all is ok");
+              console.log(data);
+              // window.location.reload();
+              //window.location = data.redirect;
+              //else if (data.status == 401);
+            },
+            error: function(data,status) {
+              console.log(arguments);
+              console.log("error!");
+            }
+        }); 
+      });
+      </script>
+    </body>
+</html>

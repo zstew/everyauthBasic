@@ -76,9 +76,7 @@ var port = 3000;
 app.listen(port, 'localhost');
 console.log("listening on port " + port); 
 
-app.get('/facebook', function (req,res ) {
-  passport.authenticate('facebook', { scope: ['email', 'user_status', "user_friends"] })(req,res)
-}
+app.get('/facebook', passport.authenticate('facebook', { scope: ['email', 'user_status', "user_friends"] })
   
   
 );
@@ -99,10 +97,13 @@ app.get('/facebook/callback', function(req,res) {
 
 app.get('/', function(req,res) {
   console.log("call index");
-  fs.readFile("/www/index.html", function(err,data) {
-    index = data
-    res.end(index)
-  })
+  index =  fs.readFileSync("./www/main.html")
+    res.send(index)
+  
+})
+app.get('/empty', function(req,res) {
+  console.log("call empty");
+  res.send({"data": "success"})
   
 })
 // app.all('*', function(req,res) {
